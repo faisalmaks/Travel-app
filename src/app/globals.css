@@ -1,26 +1,205 @@
 @import "tailwindcss";
 
+/* =========================
+   ROOT
+========================= */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #020617;
+  --card: #0f172a;
+  --border: #1e293b;
+  --text: #f8fafc;
+  --muted: #94a3b8;
+  --primary: #10b981;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+/* =========================
+   HTML
+========================= */
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(16,185,129,0.15),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at top right,
+      rgba(59,130,246,0.12),
+      transparent 25%
+    ),
+    #020617;
+
+  color: var(--text);
+
+  min-height: 100vh;
+
+  font-family:
+    Inter,
+    ui-sans-serif,
+    system-ui,
+    sans-serif;
+
+  overflow-x: hidden;
+}
+
+/* =========================
+   SCROLLBAR
+========================= */
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #020617;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #334155;
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #475569;
+}
+
+/* =========================
+   SELECTION
+========================= */
+
+::selection {
+  background: #10b981;
+  color: white;
+}
+
+/* =========================
+   GLASS EFFECT
+========================= */
+
+.glass {
+  background: rgba(
+    255,
+    255,
+    255,
+    0.05
+  );
+
+  backdrop-filter: blur(20px);
+
+  border: 1px solid rgba(
+    255,
+    255,
+    255,
+    0.08
+  );
+}
+
+/* =========================
+   CARD
+========================= */
+
+.card {
+  background: #0f172a;
+
+  border: 1px solid #1e293b;
+
+  border-radius: 24px;
+
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+
+  border-color: rgba(
+    16,
+    185,
+    129,
+    0.4
+  );
+}
+
+/* =========================
+   BUTTON
+========================= */
+
+.btn-primary {
+  background: #10b981;
+
+  color: white;
+
+  border-radius: 12px;
+
+  transition: 0.3s;
+}
+
+.btn-primary:hover {
+  background: #059669;
+}
+
+/* =========================
+   FADE ANIMATION
+========================= */
+
+.fade-in {
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =========================
+   FLOATING GLOBE
+========================= */
+
+@keyframes floating {
+  0% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.floating {
+  animation:
+    floating 5s ease-in-out infinite;
+}
+
+/* =========================
+   DASHBOARD BACKDROP
+========================= */
+
+.dashboard-bg {
+  background:
+    linear-gradient(
+      135deg,
+      rgba(16,185,129,0.08),
+      transparent
+    ),
+    linear-gradient(
+      45deg,
+      rgba(59,130,246,0.08),
+      transparent
+    );
 }
