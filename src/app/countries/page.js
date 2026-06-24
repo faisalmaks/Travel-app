@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 import Sidebar from "@/components/Sidebar";
 import Navbar from "@/components/Navbar";
-import DataTable from "@/components/DataTable";
+import CountryCard from "@/components/CountryCard";
 import Modal from "@/components/Modal";
 
 import {
@@ -25,15 +25,26 @@ export default function CountriesPage() {
     useState(null);
 
   const [formData, setFormData] = useState({
-    name: "",
-    code: "",
-    continent: "",
-    description: "",
-    currency: "",
-    languages: "",
-    bestTimeToVisit: "",
-    safetyLevel: "medium",
-  });
+      name: "",
+      code: "",
+      continent: "",
+      description: "",
+      currency: "",
+      languages: "",
+      bestTimeToVisit: "",
+      safetyLevel: "medium",
+
+      image: "",
+      flag: "",
+      capital: "",
+      population: "",
+      timezone: "",
+
+      location: {
+        lat: "",
+        lng: "",
+      },
+    });
 
   const loadCountries = async () => {
     try {
@@ -123,8 +134,8 @@ export default function CountriesPage() {
 
           <div className="flex justify-between mb-6">
 
-            <h1 className="text-3xl font-bold">
-              Countries
+            <h1 className="text-5xl font-bold text-white">
+              Explore Countries
             </h1>
 
             <button
@@ -146,21 +157,31 @@ export default function CountriesPage() {
                 e.target.value
               )
             }
-            className="border p-2 w-full mb-4 rounded"
+            className="
+              w-full
+              bg-slate-900
+              border
+              border-slate-800
+              rounded-2xl
+              px-5
+              py-4
+              text-white
+              mb-8
+            "
           />
 
-          <DataTable
-            columns={[
-              "name",
-              "code",
-              "continent",
-              "currency",
-              "safetyLevel",
-            ]}
-            data={filteredCountries}
-            onEdit={handleEdit}
-            onDelete={handleDelete}
-          />
+          <div className="grid lg:grid-cols-3 gap-8">
+
+            {filteredCountries.map((country) => (
+
+              <CountryCard
+                key={country._id}
+                country={country}
+              />
+
+            ))}
+
+          </div>
 
           <Modal
             open={open}
@@ -234,6 +255,96 @@ export default function CountriesPage() {
                     ...formData,
                     currency:
                       e.target.value,
+                  })
+                }
+                className="border p-2 rounded"
+              />
+
+              <input
+                placeholder="Country Image URL"
+                value={formData.image}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    image: e.target.value,
+                  })
+                }
+                className="border p-2 rounded"
+              />
+
+              <input
+                placeholder="Flag URL"
+                value={formData.flag}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    flag: e.target.value,
+                  })
+                }
+                className="border p-2 rounded"
+              />
+
+              <input
+                placeholder="Capital"
+                value={formData.capital}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    capital: e.target.value,
+                  })
+                }
+                className="border p-2 rounded"
+              />
+
+              <input
+                placeholder="Population"
+                value={formData.population}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    population: e.target.value,
+                  })
+                }
+                className="border p-2 rounded"
+              />
+
+              <input
+                placeholder="Timezone"
+                value={formData.timezone}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    timezone: e.target.value,
+                  })
+                }
+                className="border p-2 rounded"
+              />
+
+              <input
+                placeholder="Latitude"
+                value={formData.location.lat}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    location: {
+                      ...formData.location,
+                      lat: e.target.value,
+                    },
+                  })
+                }
+                className="border p-2 rounded"
+              />
+
+              <input
+                placeholder="Longitude"
+                value={formData.location.lng}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    location: {
+                      ...formData.location,
+                      lng: e.target.value,
+                    },
                   })
                 }
                 className="border p-2 rounded"

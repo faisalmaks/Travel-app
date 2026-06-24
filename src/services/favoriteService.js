@@ -14,15 +14,6 @@ export const createFavorite = async (data) => {
   return response.data;
 };
 
-export const updateFavorite = async (id, data) => {
-  const response = await api.put(
-    `/favorite/${id}`,
-    data
-  );
-
-  return response.data;
-};
-
 export const deleteFavorite = async (id) => {
   const response = await api.delete(
     `/favorite/${id}`

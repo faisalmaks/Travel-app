@@ -29,6 +29,11 @@ export default function Sidebar() {
       icon: <FaChartPie />,
     },
     {
+      label: "Explorer",
+      href: "/explorer",
+      icon: <FaPlaneDeparture />,
+    },
+    {
       label: "Countries",
       href: "/countries",
       icon: <FaGlobeAsia />,
@@ -69,12 +74,17 @@ export default function Sidebar() {
       icon: <FaHeart />,
     },
     {
+      label: "My Trips",
+      href: "/itineraries",
+      icon: <FaRoute />,
+    },
+    {
       label: "Visa",
       href: "/visa",
       icon: <FaPassport />,
     },
     {
-      label: "Itineraries",
+      label: "My Trips",
       href: "/itineraries",
       icon: <FaRoute />,
     },
@@ -107,7 +117,7 @@ export default function Sidebar() {
             </h1>
 
             <p className="text-xs text-slate-400">
-              Travel Management
+               Muslim Friendly Explorer
             </p>
 
           </div>
@@ -133,7 +143,7 @@ export default function Sidebar() {
             </p>
 
             <p className="text-sm text-slate-400">
-              Administrator
+              Global Traveler
             </p>
 
           </div>
@@ -147,7 +157,7 @@ export default function Sidebar() {
       <nav className="flex-1 p-4 overflow-y-auto">
 
         <p className="text-xs uppercase tracking-wider text-slate-500 mb-4 px-3">
-          Navigation
+          Explore
         </p>
 
         {menu.map((item) => {
@@ -183,14 +193,13 @@ export default function Sidebar() {
       <div className="p-4 border-t border-slate-800">
 
         <div className="bg-slate-900 rounded-xl p-4">
+        <p className="text-sm text-slate-400">
+          Countries Available
+        </p>
 
-          <p className="text-sm text-slate-400">
-            Active Destinations
-          </p>
-
-          <h3 className="text-2xl font-bold text-emerald-400">
-            124
-          </h3>
+        <h3 className="text-2xl font-bold text-emerald-400">
+          {menu.length}
+        </h3>
 
         </div>
 

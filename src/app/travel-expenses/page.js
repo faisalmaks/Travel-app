@@ -16,7 +16,7 @@ import {
 
 import {
   getItineraries,
-} from "@/services/itineraryService";
+} from "@/services/travelItineraryService";
 
 export default function TravelExpensesPage() {
   const [expenses, setExpenses] =

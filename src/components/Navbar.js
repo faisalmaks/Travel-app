@@ -27,8 +27,21 @@ export default function Navbar() {
 
           <input
             type="text"
-            placeholder="Search countries, cities, hotels..."
-            className="bg-slate-900 border border-slate-700 rounded-xl pl-12 pr-4 py-3 text-white w-[350px] outline-none focus:border-emerald-500"
+            placeholder="Search destinations, hotels, restaurants..."
+            className="
+              bg-slate-900
+              border
+              border-slate-800
+              rounded-2xl
+              pl-12
+              pr-4
+              py-3
+              text-white
+              w-[420px]
+              outline-none
+              focus:border-emerald-500
+              transition
+            "
           />
 
         </div>
@@ -46,7 +59,7 @@ export default function Navbar() {
           <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
 
           <span className="text-sm text-slate-300">
-            Live
+            Real Time
           </span>
 
         </div>
@@ -70,7 +83,7 @@ export default function Navbar() {
           />
 
           <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs px-1.5 rounded-full">
-            3
+            9
           </span>
 
         </button>
@@ -87,7 +100,7 @@ export default function Navbar() {
           <div className="hidden md:block">
 
             <p className="text-white text-sm font-semibold">
-              Traveler
+              Travel Explorer
             </p>
 
             <p className="text-slate-400 text-xs">
