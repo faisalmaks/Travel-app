@@ -204,7 +204,7 @@ useEffect(() => {
         atmosphereAltitude={0.2}
 
         pointsData={countries}
-        pointAltitude="size"
+        pointAltitude={0.01}
         pointRadius={0.5}
         pointColor={() => "#10b981"}
 

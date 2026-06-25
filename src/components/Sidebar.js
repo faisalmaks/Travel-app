@@ -84,11 +84,6 @@ export default function Sidebar() {
       icon: <FaPassport />,
     },
     {
-      label: "My Trips",
-      href: "/itineraries",
-      icon: <FaRoute />,
-    },
-    {
       label: "Expenses",
       href: "/travel-expenses",
       icon: <FaMoneyBillWave />,
