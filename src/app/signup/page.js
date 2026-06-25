@@ -1,127 +1,185 @@
 "use client";
 
-import {
-  useState,
-} from "react";
-
-import {
-  useRouter,
-} from "next/navigation";
-
-import {
-  useAuth,
-} from "@/context/AuthProvider";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
+import { User, Mail, Lock, ArrowRight } from "lucide-react";
+import { useAuth } from "@/context/AuthProvider";
 
 export default function SignupPage() {
-  const router =
-    useRouter();
+  const router = useRouter();
+  const { signupUser } = useAuth();
 
-  const {
-    signupUser,
-  } = useAuth();
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
 
-  const [formData,
-    setFormData] =
-    useState({
-      name: "",
-      email: "",
-      password: "",
-    });
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit =
-    async (e) => {
-      e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-      try {
-        await signupUser(
-          formData
-        );
+    try {
+      setLoading(true);
 
-        router.push(
-          "/login"
-        );
-      } catch (error) {
-  console.log(error);
+      await signupUser(formData);
 
-  console.log(error.response);
-
-  alert(
-    JSON.stringify(
-      error.response?.data ||
-      error.message
-    )
-  );
-}
-    };
+      router.push("/login");
+    } catch (error) {
+      alert(
+        JSON.stringify(
+          error.response?.data || error.message
+        )
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-slate-100">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-slate-800 to-blue-900 px-6">
 
-      <form
-        onSubmit={
-          handleSubmit
-        }
-        className="bg-white p-8 rounded shadow w-full max-w-md"
-      >
-        <h1 className="text-2xl font-bold mb-6">
-          Signup
-        </h1>
+      <div className="w-full max-w-md">
 
-        <input
-          placeholder="Name"
-          value={
-            formData.name
-          }
-          onChange={(e) =>
-            setFormData({
-              ...formData,
-              name:
-                e.target.value,
-            })
-          }
-          className="border p-3 rounded w-full mb-4"
-        />
+        <div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl shadow-2xl p-8">
 
-        <input
-          type="email"
-          placeholder="Email"
-          value={
-            formData.email
-          }
-          onChange={(e) =>
-            setFormData({
-              ...formData,
-              email:
-                e.target.value,
-            })
-          }
-          className="border p-3 rounded w-full mb-4"
-        />
+          <div className="text-center mb-8">
 
-        <input
-          type="password"
-          placeholder="Password"
-          value={
-            formData.password
-          }
-          onChange={(e) =>
-            setFormData({
-              ...formData,
-              password:
-                e.target.value,
-            })
-          }
-          className="border p-3 rounded w-full mb-4"
-        />
+            <h1 className="text-4xl font-bold text-white">
+              Create Account
+            </h1>
 
-        <button
-          type="submit"
-          className="w-full bg-green-600 text-white py-3 rounded"
-        >
-          Signup
-        </button>
+            <p className="text-slate-300 mt-2">
+              Join Travel City Dashboard
+            </p>
 
-      </form>
+          </div>
+
+          <form onSubmit={handleSubmit} className="space-y-5">
+
+            <div>
+
+              <label className="text-white text-sm mb-2 block">
+                Full Name
+              </label>
+
+              <div className="relative">
+
+                <User
+                  className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"
+                  size={20}
+                />
+
+                <input
+                  type="text"
+                  placeholder="John Doe"
+                  value={formData.name}
+                  onChange={(e) =>
+                    setFormData({
+                      ...formData,
+                      name: e.target.value,
+                    })
+                  }
+                  className="w-full pl-12 pr-4 py-3 rounded-xl bg-white text-slate-900 border border-slate-300 focus:ring-4 focus:ring-blue-500/30 focus:border-blue-500 outline-none transition"
+                  required
+                />
+
+              </div>
+
+            </div>
+
+            <div>
+
+              <label className="text-white text-sm mb-2 block">
+                Email Address
+              </label>
+
+              <div className="relative">
+
+                <Mail
+                  className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"
+                  size={20}
+                />
+
+                <input
+                  type="email"
+                  placeholder="you@example.com"
+                  value={formData.email}
+                  onChange={(e) =>
+                    setFormData({
+                      ...formData,
+                      email: e.target.value,
+                    })
+                  }
+                  className="w-full pl-12 pr-4 py-3 rounded-xl bg-white text-slate-900 border border-slate-300 focus:ring-4 focus:ring-blue-500/30 focus:border-blue-500 outline-none transition"
+                  required
+                />
+
+              </div>
+
+            </div>
+
+            <div>
+
+              <label className="text-white text-sm mb-2 block">
+                Password
+              </label>
+
+              <div className="relative">
+
+                <Lock
+                  className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"
+                  size={20}
+                />
+
+                <input
+                  type="password"
+                  placeholder="********"
+                  value={formData.password}
+                  onChange={(e) =>
+                    setFormData({
+                      ...formData,
+                      password: e.target.value,
+                    })
+                  }
+                  className="w-full pl-12 pr-4 py-3 rounded-xl bg-white text-slate-900 border border-slate-300 focus:ring-4 focus:ring-blue-500/30 focus:border-blue-500 outline-none transition"
+                  required
+                />
+
+              </div>
+
+            </div>
+
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white py-3 rounded-xl font-semibold shadow-lg transition duration-300"
+            >
+              {loading ? "Creating..." : "Create Account"}
+
+              {!loading && <ArrowRight size={18} />}
+            </button>
+
+          </form>
+
+          <p className="text-center text-slate-300 mt-8">
+
+            Already have an account?
+
+            <Link
+              href="/login"
+              className="text-cyan-400 hover:text-cyan-300 font-semibold ml-2"
+            >
+              Login
+            </Link>
+
+          </p>
+
+        </div>
+
+      </div>
 
     </div>
   );
